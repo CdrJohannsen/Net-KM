@@ -18,12 +18,20 @@ cmake --build build
 
 The executables `net-km-server` and `net-km-client` will be in `build/`
 
+### Install
+
+If you actually want to install this you can run
+
+```bash
+sudo cmake --install build
+```
+
 ## Usage
 
 ### On the server:
 
 ```bash
-path/to/net-km-server [/dev/input/...]
+net-km-server [/dev/input/...]
 ```
 
 The devices can be found at `/dev/input/by-id/` and are probably called something like `usb-<name of your device>-event-mouse` and `usb-<name of your device>-event-kbd` there are other devices with similar names that will probably not work
@@ -31,7 +39,7 @@ The devices can be found at `/dev/input/by-id/` and are probably called somethin
 ### On the client:
 
 ```bash
-path/to/net-km-client <server ip>
+net-km-client <server ip>
 ```
 
 ## Allowing rootless access to /dev/uinput
