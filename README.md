@@ -33,3 +33,27 @@ The devices can be found at `/dev/input/by-id/` and are probably called somethin
 ```bash
 path/to/net-km-client <server ip>
 ```
+
+## Allowing rootless access to /dev/uinput
+
+In order for the client to write keyboard and mouse events, it needs access to `/dev/uinput` and have the uinput kernel module loaded.
+
+In order to do that, you will need to create a group for all users that should be allowed to use the client
+
+```bash
+sudo groupadd uinput
+sudo usermod -a -G uinput <username>
+```
+
+Then you'll need to give users of the `uinput` group read and write access to `/dev/uinput`.
+Write this line to `/etc/udev/rules.d/99-input.rules`
+
+```
+KERNEL=="uinput",GROUP="uinput",MODE:="0660"
+```
+
+Lastly if you want the uinput kernel module to always be loaded, add this line to `/etc/modules-load.d/uinput.conf`
+
+```
+uinput
+```
